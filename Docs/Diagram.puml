@@ -1,0 +1,56 @@
+@startuml
+title Component Diagram: Each component as a folder
+component GameManager
+note bottom of GameManager
+    Manage states of game
+end note
+package Managers {
+    component LevelManager
+    note bottom of LevelManager
+        Control current level, provide apis that
+        game will do in win, lose state
+    end note
+    component DataManager
+    note bottom of DataManager
+        Store and load user data,
+        game data
+    end note
+    component PlayerManager
+    note bottom of PlayerManager
+        Init player
+        Control player by input handling
+        Check game win or lose
+    end note
+    component ObstacleManager
+    note bottom of ObstacleManager
+        Init obstacles
+    end note
+    component UIManager
+    note bottom of UIManager
+        Init UI
+        Provide apis for other manager to call
+    end note
+    component AdsManager
+    note bottom of AdsManager
+        Init UI
+        Provide apis for other manager to call
+    end note
+    component AudioManager
+    note bottom of AudioManager
+        Init audio
+        Provide apis
+    end note
+}
+note left of Managers
+    All managers will 
+    not be destroyed in 
+    lifetime of the game
+end note
+
+package Controllers {
+    package UI {
+        component MainController
+        component LevelController
+    }
+}
+@enduml
