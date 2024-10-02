@@ -1,0 +1,18 @@
+@startuml
+actor User
+User -> Screen: Click
+Screen -> GameManager: Init
+GameManager -> GameManager: Init all managers
+GameManager -> DataManager: LoadData (coin, heart, level..)
+DataManager -> GameManager: return
+GameManager -> UIManager: ShowMainUIData()
+UIManager -> DataManager: Get coin,heart,level
+DataManager -> UIManager: return
+UIManager -> GameManager: return
+GameManager -> AudioManager: PlayAudio()
+AudioManager -> DataManager: IsEnableAudio()
+DataManager -> AudioManager: return bool
+AudioManager -> AudioManager: Play(bool)
+AudioManager -> GameManager: return
+GameManager -> Screen: UI&Audio
+@enduml

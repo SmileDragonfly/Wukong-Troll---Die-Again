@@ -1,0 +1,10 @@
+@startuml
+title MainUI
+actor User
+== Play Button ==
+User -> Mobile: click play
+Mobile -> PlayButtonController: OnClicked
+PlayButtonController -> LevelManager: LoadScene(isNext = false)
+LevelManager -> Mobile: new Scene
+== Setting Button ==
+@enduml
