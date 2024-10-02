@@ -1,0 +1,31 @@
+@startuml
+title MainUI
+actor User
+== 1. Play Button ==
+User -> Mobile: 1. Click play
+Mobile -> PlayBtnCtrl: OnClicked
+PlayBtnCtrl -> LevelManager: LoadScene(isNext = false)
+LevelManager -> Mobile: new Scene
+== 2. Setting Button Click ==
+note across: Enable sound, music
+User -> Mobile: 2. Click setting button
+Mobile -> MainUICtrl: OnSettingClicked
+MainUICtrl -> MainUICtrl: ShowSettingPanel(true)
+MainUICtrl -> Mobile: return
+Mobile -> User: return
+== 3. On/Off Sound/Music ==
+User -> Mobile: 3. On/Off Sound/Music
+Mobile -> MainUICtrl: OnToggleSound(bool)
+MainUICtrl -> DataManager: Store setting value
+DataManager -> MainUICtrl: return
+MainUICtrl -> AudioManager: Enable/Disable Sound/Music
+AudioManager -> MainUICtrl: return
+MainUICtrl -> Mobile: return
+Mobile -> User: return
+== 4. Close setting ==
+User -> Mobile: 4.Close setting panel
+Mobile -> MainUICtrl: OnBtnCloseSettingClick()
+MainUICtrl -> MainUICtrl: ShowSettingPanel(false)
+MainUICtrl -> Mobile: return
+Mobile -> User: return
+@enduml
