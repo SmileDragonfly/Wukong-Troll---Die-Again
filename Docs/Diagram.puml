@@ -40,6 +40,15 @@ package Controllers {
         component MainController
         component LevelController
     }
+
+    package Gameplay {
+        component PlayerController [
+            PlayerController:
+            - Control input
+            - Check alive/die
+        ]
+        component ObstacleController
+    }
 }
 
 Managers --> Controllers
