@@ -17,7 +17,7 @@ public class PlayerController : MonoBehaviour
     // Start is called before the first frame update
     // Public members
     public float speed = 1f;
-    public float jumpSpeed = 1f;
+    public float jumpSpeed = 10f;
 
     // Private members
     Animator animator;
@@ -45,9 +45,6 @@ public class PlayerController : MonoBehaviour
                 Run(1); break;
             case PlayerState.BACKWARD: 
                 Run(-1); break;
-            case PlayerState.JUMP:
-                Jump(); break;
-            default:
                 break;
         }
     }
@@ -69,6 +66,11 @@ public class PlayerController : MonoBehaviour
         {
             animator.SetTrigger("Idle");
             state = PlayerState.IDLE;
+        }
+          
+        if(Input.GetButtonDown("Jump"))
+        {
+            Jump();
         }
     }
 
