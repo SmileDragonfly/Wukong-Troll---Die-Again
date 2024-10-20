@@ -1,0 +1,13 @@
+@startuml
+class TrapBase {
+    + Vector2 pos
+    + Object prePlayObj
+    + Object postPlayObj
+    + Object targetObject
+    + void Init(Vector2 pos)
+    + void Show()
+    + void Hide()
+    + void Destroy()
+    + void Play()
+}
+@enduml
