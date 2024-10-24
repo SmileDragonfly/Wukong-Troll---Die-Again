@@ -9,7 +9,7 @@ public class TrapLandSlide : TrapBase
 {
     public override void PlayTrap()
     {
-        Debug.Log("On PlayTrap");
+        Debug.Log("PlayTrap TrapLandSlide");
         //tilemap.SetTile(removedPostion, null);
         Rigidbody2D rb = GetComponent<Rigidbody2D>();
         rb.bodyType = RigidbodyType2D.Dynamic;
@@ -18,9 +18,9 @@ public class TrapLandSlide : TrapBase
 
     private IEnumerator DestroyTrap()
     {
-        Debug.Log("DestroyTrap");
+        Debug.Log("DestroyTrap DestroyTrap");
         yield return new WaitForSeconds(5f);
-        Debug.Log("DestroyTrap Done");
+        Debug.Log("DestroyTrap DestroyTrap");
         Destroy(gameObject);
     }
 }
