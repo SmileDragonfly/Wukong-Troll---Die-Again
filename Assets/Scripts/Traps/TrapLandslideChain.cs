@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class TrapLandslideChain : TrapBase
+public class TrapLandSlideChain : TrapBase
 {
     public List<TrapLandSlide> listTraps;
     public float delayBetweenTrap = 1f;

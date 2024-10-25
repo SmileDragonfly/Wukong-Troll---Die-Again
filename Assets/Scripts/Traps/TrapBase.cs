@@ -26,7 +26,6 @@ public abstract class TrapBase : MonoBehaviour
         yield return new WaitForSeconds(activationDelay);
         // Add your trap deactivation logic here, if needed
         PlayTrap();
-        isActivated = false;
     }
 
     public abstract void PlayTrap(); 
