@@ -31,17 +31,20 @@ public class TrapLandWave : TrapBase
         float heightChange = 0f;
         for (int i = 0; i < repeatTimes; i++)
         {
-            // Up
-            while (heightChange < upMax)
+            if(isUpFirst)
             {
-                transform.position = new Vector2(transform.position.x, transform.position.y + upSpeed * Time.deltaTime);
-                heightChange += upSpeed * Time.deltaTime;
-                yield return null; // Wait next frame
+                // Up
+                while (heightChange < upMax)
+                {
+                    transform.position = new Vector2(transform.position.x, transform.position.y + upSpeed * Time.deltaTime);
+                    heightChange += upSpeed * Time.deltaTime;
+                    yield return null; // Wait next frame
+                }
+
+                // Hold in up position
+                yield return new WaitForSeconds(upPositionHoldTime);
             }
-
-            // Hold in up position
-            yield return new WaitForSeconds(upPositionHoldTime);
-
+            isUpFirst = true;
             // Down
             while (heightChange > -downMax)
             {
