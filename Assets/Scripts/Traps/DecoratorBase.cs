@@ -67,5 +67,4 @@ public class DecoratorBase : MonoBehaviour
             Debug.Log("DecoratorBase: OnTriggerEnter2D");
         }
     }
-
 }

@@ -8,6 +8,7 @@ public abstract class TrapBase : MonoBehaviour
     public string trapName = string.Empty;
     public GameObject trapObject;
     public float activationDelay = 0;
+    public List<DecoratorBase> listDecor;
     // Private
     public bool isActivated = false;
     protected void OnTriggerEnter2D(Collider2D other)
@@ -26,6 +27,16 @@ public abstract class TrapBase : MonoBehaviour
         yield return new WaitForSeconds(activationDelay);
         // Add your trap deactivation logic here, if needed
         PlayTrap();
+        if (listDecor != null)
+        {
+            for (int i = 0; i < listDecor.Count; i++)
+            {
+                if (listDecor[i] != null)
+                {
+                    listDecor[i].Play();
+                }
+            }
+        }
     }
 
     public abstract void PlayTrap(); 
