@@ -6509,7 +6509,7 @@ MonoBehaviour:
   onTime: 0
   offTime: 0
   center: {fileID: 1188626886}
-  trajectoryLine: 0
+  trajectoryLine: 2
   radius: 1
   speed: 1
   numRepeat: 0

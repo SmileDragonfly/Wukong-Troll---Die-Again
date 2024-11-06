@@ -13,6 +13,15 @@ public class SpikeDecorator : DecoratorBase
         Spiral,     // hinh xoan oc
     }
 
+    public enum LineDirection 
+    {
+        Unk = 0,
+        Up, 
+        Left, 
+        Down,
+        Right,
+    }
+
     public Transform center;
     public TrajectoryLine trajectoryLine;
     public float radius;
@@ -22,6 +31,8 @@ public class SpikeDecorator : DecoratorBase
     // Private
     private bool bMoveLeft = true;
     private int nRepeatedCount = 0;
+    private float angle = 0;
+    private LineDirection direction = LineDirection.Unk;
 
     private void Update()
     {
@@ -70,8 +81,62 @@ public class SpikeDecorator : DecoratorBase
             }                   
         }        
     }
-    private void MoveCircle() { }
-    private void MoveSquare() { }
+    private void MoveCircle() 
+    {
+        if ((nRepeatedCount < numRepeat) || (numRepeat == 0))
+        {
+            angle += speed * Time.deltaTime;
+            transform.position = new Vector3(center.position.x + radius * Mathf.Cos(angle), center.position.y + radius * Mathf.Sin(angle), 0);
+            if (angle > 2 * Mathf.PI)
+            {
+                angle -= 2 * Mathf.PI;
+                nRepeatedCount++;
+            }
+        }
+    }
+    private void MoveSquare() 
+    {
+        if (direction == LineDirection.Unk)
+        {
+            direction = LineDirection.Up;
+            transform.position = center.position + new Vector3(-radius, 0, 0);
+        }
+        if ((nRepeatedCount < numRepeat) || (numRepeat == 0))
+        {
+            switch(direction)
+            {
+                case LineDirection.Up:
+                    transform.position = new Vector3(transform.position.x, transform.position.y + Time.deltaTime * speed, transform.position.z);
+                    if (transform.position.y >= (center.position.y + radius))
+                    {
+                        direction = LineDirection.Right;
+                    }
+                    break;
+                case LineDirection.Right:
+                    transform.position = new Vector3(transform.position.x + Time.deltaTime * speed, transform.position.y, transform.position.z);
+                    if (transform.position.x >= (center.position.x + radius))
+                    {
+                        direction = LineDirection.Down;
+                    }
+                    break;
+                case LineDirection.Down:
+                    transform.position = new Vector3(transform.position.x, transform.position.y - Time.deltaTime * speed, transform.position.z);
+                    if (transform.position.y <= (center.position.y - radius))
+                    {
+                        direction = LineDirection.Left;
+                    }
+                    break;
+                case LineDirection.Left:
+                    transform.position = new Vector3(transform.position.x - Time.deltaTime * speed, transform.position.y, transform.position.z);
+                    if (transform.position.x <= (center.position.x - radius))
+                    {
+                        direction = LineDirection.Up;
+                        nRepeatedCount++;
+                    }
+                    break;
+            }
+        }
+    }
     private void MoveEllipse() { }
     private void MoveSpiral() { }
 
