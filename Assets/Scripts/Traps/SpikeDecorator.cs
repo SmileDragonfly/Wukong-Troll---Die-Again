@@ -26,7 +26,8 @@ public class SpikeDecorator : DecoratorBase
     public TrajectoryLine trajectoryLine;
     public float radius;
     public float speed;
-    public int numRepeat;
+    public float radiusX;
+    public float radiusY;
 
     // Private
     private bool bMoveLeft = true;
@@ -60,7 +61,7 @@ public class SpikeDecorator : DecoratorBase
 
     private void MoveLine() 
     {
-        if ((nRepeatedCount < numRepeat) || (numRepeat == 0))
+        if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
         {
             if (bMoveLeft)
             {
@@ -83,7 +84,7 @@ public class SpikeDecorator : DecoratorBase
     }
     private void MoveCircle() 
     {
-        if ((nRepeatedCount < numRepeat) || (numRepeat == 0))
+        if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
         {
             angle += speed * Time.deltaTime;
             transform.position = new Vector3(center.position.x + radius * Mathf.Cos(angle), center.position.y + radius * Mathf.Sin(angle), 0);
@@ -101,7 +102,7 @@ public class SpikeDecorator : DecoratorBase
             direction = LineDirection.Up;
             transform.position = center.position + new Vector3(-radius, 0, 0);
         }
-        if ((nRepeatedCount < numRepeat) || (numRepeat == 0))
+        if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
         {
             switch(direction)
             {
@@ -137,7 +138,10 @@ public class SpikeDecorator : DecoratorBase
             }
         }
     }
-    private void MoveEllipse() { }
+    private void MoveEllipse() 
+    {
+        
+    }
     private void MoveSpiral() { }
 
 }

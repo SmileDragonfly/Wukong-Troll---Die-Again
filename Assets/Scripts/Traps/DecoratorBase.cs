@@ -6,7 +6,7 @@ public class DecoratorBase : MonoBehaviour
 {
     public TrapBase trap;
     public bool isRepeating;
-    public float numberOfRepeating;
+    public int numberOfRepeating;
     public float onTime;
     public float offTime;
     // Private
