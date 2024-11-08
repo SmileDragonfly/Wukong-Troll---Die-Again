@@ -24,13 +24,13 @@ public class SpikeDecorator : DecoratorBase
 
     public Transform center;
     public TrajectoryLine trajectoryLine;
-    public float radius;
-    public float speed;
-    public float radiusX;
-    public float radiusY;
+    public float radius = 1f;
+    public float speed = 1f;
+    public float radiusX = 1.5f;
+    public float radiusY = 0.5f;
 
     // Private
-    private bool bMoveLeft = true;
+    private int nMoveDirection = 1;
     private int nRepeatedCount = 0;
     private float angle = 0;
     private LineDirection direction = LineDirection.Unk;
@@ -63,12 +63,12 @@ public class SpikeDecorator : DecoratorBase
     {
         if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
         {
-            if (bMoveLeft)
+            if (nMoveDirection == 1)
             {
                 transform.position = new Vector3(transform.position.x + Time.deltaTime * speed, transform.position.y, transform.position.z);
                 if (transform.position.x >= (center.position.x + radius))
                 {
-                    bMoveLeft = false;
+                    nMoveDirection = -1;
                 }
             } 
             else
@@ -76,7 +76,7 @@ public class SpikeDecorator : DecoratorBase
                 transform.position = new Vector3(transform.position.x - Time.deltaTime * speed, transform.position.y, transform.position.z);
                 if (transform.position.x <= (center.position.x - radius))
                 {
-                    bMoveLeft = true;
+                    nMoveDirection = 1;
                     nRepeatedCount++;
                 }
             }                   
@@ -140,8 +140,30 @@ public class SpikeDecorator : DecoratorBase
     }
     private void MoveEllipse() 
     {
-        
+        if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
+        {
+            angle += speed * Time.deltaTime;
+            transform.position = new Vector3(center.position.x + radiusX * Mathf.Cos(angle), center.position.y + radiusY * Mathf.Sin(angle), 0);
+            if (angle > 2 * Mathf.PI)
+            {
+                angle -= 2 * Mathf.PI;
+                nRepeatedCount++;
+            }
+        }
     }
-    private void MoveSpiral() { }
+    private void MoveSpiral() 
+    {
+        if ((nRepeatedCount < numberOfRepeating) || (numberOfRepeating == 0))
+        {
+            angle += speed * Time.deltaTime * nMoveDirection;
+            float currentRadius = radius + 0.2f * angle;
+            transform.position = new Vector3(center.position.x + currentRadius * Mathf.Cos(angle), center.position.y + currentRadius * Mathf.Sin(angle), 0);
+            if (angle > 2 * Mathf.PI || angle < 0)
+            {
+                nRepeatedCount++;
+                nMoveDirection = -nMoveDirection;
+            }
+        }
+    }
 
 }

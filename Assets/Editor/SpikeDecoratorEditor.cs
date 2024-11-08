@@ -15,18 +15,18 @@ public class SpikeDecoratorEditor : Editor
         myTarget.trajectoryLine = (TrajectoryLine)EditorGUILayout.EnumPopup("Trajectory Line", myTarget.trajectoryLine);
         if(myTarget.trajectoryLine == TrajectoryLine.Ellipse)
         {
-            EditorGUILayout.ObjectField("Center", myTarget.center, typeof(Transform), true);
-            EditorGUILayout.FloatField("Speed", myTarget.speed);
-            EditorGUILayout.IntField("Num Repeat", myTarget.numberOfRepeating);
-            EditorGUILayout.FloatField("Radius X", myTarget.radiusX);
-            EditorGUILayout.FloatField("Radius Y", myTarget.radiusY);
+            myTarget.center = (Transform)EditorGUILayout.ObjectField("Center", myTarget.center, typeof(Transform), true);
+            myTarget.speed = EditorGUILayout.FloatField("Speed", myTarget.speed);
+            myTarget.numberOfRepeating = EditorGUILayout.IntField("Numer Of Repeating", myTarget.numberOfRepeating);
+            myTarget.radiusX = EditorGUILayout.FloatField("Radius X", myTarget.radiusX);
+            myTarget.radiusY = EditorGUILayout.FloatField("Radius Y", myTarget.radiusY);
         }
         else
         {
-            EditorGUILayout.ObjectField("Center", myTarget.center, typeof(Transform), true);
-            EditorGUILayout.FloatField("Speed", myTarget.speed);
-            EditorGUILayout.IntField("Num Repeat", myTarget.numberOfRepeating);
-            EditorGUILayout.FloatField("Radius", myTarget.radius);
+            myTarget.center = (Transform)EditorGUILayout.ObjectField("Center", myTarget.center, typeof(Transform), true);
+            myTarget.speed = EditorGUILayout.FloatField("Speed", myTarget.speed);
+            myTarget.numberOfRepeating = EditorGUILayout.IntField("Numer Of Repeating", myTarget.numberOfRepeating);
+            myTarget.radius = EditorGUILayout.FloatField("Radius", myTarget.radius);
         }
         // Save change to object
         if (GUI.changed)

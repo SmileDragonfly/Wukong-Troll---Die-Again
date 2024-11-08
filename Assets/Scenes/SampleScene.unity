@@ -6509,11 +6509,11 @@ MonoBehaviour:
   onTime: 0
   offTime: 0
   center: {fileID: 1188626886}
-  trajectoryLine: 1
+  trajectoryLine: 3
   radius: 1
   speed: 1
-  radiusX: 0
-  radiusY: 0
+  radiusX: 1
+  radiusY: 0.5
 --- !u!212 &845893010
 SpriteRenderer:
   m_ObjectHideFlags: 0
