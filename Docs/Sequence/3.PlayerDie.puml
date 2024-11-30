@@ -1,0 +1,14 @@
+@startuml
+[-> PlayerController: OnTriggerEnter2D(collider.tag = TrapDecor)
+PlayerController -> LevelManager: PlayerDie()
+LevelManager -> UIManager: ShowPlayerDieScreen()
+LevelManager -> AudioManager: PlayPlayerDieSound()
+LevelManager -> AdsManager: ShowInterstitialAds()
+LevelManager -> LevelManager: PauseGame()
+[-> UIManager: Replay()
+UIManager -> GameManager: LoadScene(scene=currScene) 
+GameManager -> GameManager: SceneManagement.LoadScene(currScene)
+[-> UIManager: Main()
+UIManager -> GameManager: LoadScene(scene=Main) 
+GameManager -> GameManager: SceneManagement.LoadScene(Main)
+@enduml
